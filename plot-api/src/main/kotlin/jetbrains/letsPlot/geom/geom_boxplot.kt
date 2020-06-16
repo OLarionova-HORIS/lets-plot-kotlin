@@ -17,7 +17,7 @@ import jetbrains.letsPlot.intern.layer.geom.BoxplotAesthetics
 import jetbrains.letsPlot.intern.layer.geom.BoxplotMapping
 import jetbrains.letsPlot.intern.layer.geom.BoxplotParameters
 
-@Suppress("ClassName", "unused")
+@Suppress("ClassName")
 /**
  * Add box plot.
  *
@@ -38,7 +38,7 @@ import jetbrains.letsPlot.intern.layer.geom.BoxplotParameters
  * @param outlierShape
  * @param outlierSize
  *     Default aesthetics for outliers.
- * @param varwidth
+ * @param varWidth
  *     if FALSE (default) make a standard box plot.
  *     If TRUE, boxes are drawn with widths proportional to the square-roots of the number of
  *     observations in the groups.
@@ -63,10 +63,10 @@ import jetbrains.letsPlot.intern.layer.geom.BoxplotParameters
  *     mapped to plot "aesthetics".
  */
 class geom_boxplot(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.boxplot(),
     position: PosOptions = Pos.dodge,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val x: Double? = null,
     override val lower: Double? = null,
@@ -78,8 +78,10 @@ class geom_boxplot(
     override val outlierFill: Any? = null,
     override val outlierShape: Any? = null,
     override val outlierSize: Double? = null,
-    override val varwidth: Boolean? = null,
     override val fatten: Double? = null,
+    override val varWidth: Boolean? = null,
+    @Suppress("SpellCheckingInspection")
+    override val coef: Any? = null,
     override val alpha: Double? = null,
     override val color: Any? = null,
     override val fill: Any? = null,
@@ -97,7 +99,7 @@ class geom_boxplot(
         geom = boxplot(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     ) {
     override fun seal(): Options {

@@ -47,12 +47,12 @@ import jetbrains.letsPlot.intern.layer.geom.LineMapping
  *     mapped to plot "aesthetics".
  */
 class geom_step(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = Pos.identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
-    val direction: String? = null,
+    private val direction: String? = null,
     override val x: Double? = null,
     override val y: Double? = null,
     override val alpha: Double? = null,
@@ -67,7 +67,7 @@ class geom_step(
         geom = Geom.step(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     ) {
     override fun seal(): Options {

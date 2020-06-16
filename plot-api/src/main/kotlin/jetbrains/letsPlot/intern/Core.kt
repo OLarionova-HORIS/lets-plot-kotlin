@@ -15,7 +15,7 @@ import jetbrains.letsPlot.intern.layer.StatOptions
 
 
 class Plot internal constructor(
-    val data: Any? = null,
+    val data: Map<*, *>? = null,
     val mapping: Options = GenericAesMapping().seal(),
     val features: List<Feature> = emptyList(),
     val widthScale: Int? = null
@@ -80,7 +80,7 @@ sealed class Feature {
 }
 
 
-internal class FeatureList(val elements: List<Feature>) : Feature() {
+class FeatureList(val elements: List<Feature>) : Feature() {
     override operator fun plus(other: Feature): Feature {
         return when (other) {
             is DummyFeature -> this // nothing
@@ -98,11 +98,11 @@ internal object DummyFeature : Feature() {
 
 abstract class Layer(
     mapping: Options,
-    val data: Any?,
+    val data: Map<*, *>?,
     val geom: GeomOptions,
     val stat: StatOptions,
     val position: PosOptions,
-    val show_legend: Boolean,
+    val showLegend: Boolean,
     val sampling: SamplingOptions?
 ) : Feature() {
 
@@ -121,14 +121,14 @@ class Scale(
     val labels: List<String>? = null,
     val limits: List<Any>? = null,
     val expand: Any? = null,
-    val na_value: Any? = null,
+    val naValue: Any? = null,
     val guide: Any? = null,
     val trans: Any? = null,
     val otherOptions: Options = Options.empty()
 
 ) : Feature()
 
-class OtherPlotFeature internal constructor(
+open class OtherPlotFeature internal constructor(
     val kind: String,
     val options: Map<String, Any>
 ) : Feature()

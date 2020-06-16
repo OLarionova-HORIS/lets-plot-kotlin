@@ -10,7 +10,8 @@ import jetbrains.letsPlot.Pos
 import jetbrains.letsPlot.Stat
 import jetbrains.letsPlot.geom.*
 import jetbrains.letsPlot.ggplot
-import jetbrains.letsPlot.ggtitle
+import jetbrains.letsPlot.label.ggtitle
+import jetbrains.letsPlot.position_dodge
 
 object ErrorBar {
     @JvmStatic
@@ -27,55 +28,58 @@ object ErrorBar {
 
             fun withLinesAndPoints() {
                 val geom = geom_errorbar(
-                    position = Pos.position_dodge(width = 0.1),
+                    position = position_dodge(width = 0.1),
                     color = "black",
                     width = 0.1
                 ) {
                     ymin = "min"; ymax = "max"; group = "supp"
                 } +
-                        geom_line(position = Pos.position_dodge(width = 0.1)) +
-                        geom_point(position = Pos.position_dodge(width = 0.1), size = 5.0)
+                        geom_line(position = position_dodge(width = 0.1)) +
+                        geom_point(position = position_dodge(width = 0.1), size = 5.0)
 
                 val p = plot + geom
                 p.show()
             }
 
+            @Suppress("SpellCheckingInspection")
             fun errorbar() {
                 val geom = geom_errorbar(
-                    position = Pos.position_dodge(width = 0.1),
+                    position = position_dodge(width = 0.1),
                     width = 0.1
                 ) {
-                    ymin = "min"; ymax = "max";
+                    ymin = "min"; ymax = "max"
                 } +
-                        geom_line(position = Pos.position_dodge(width = 0.1)) +
-                        geom_point(position = Pos.position_dodge(width = 0.1), size = 2.0)
+                        geom_line(position = position_dodge(width = 0.1)) +
+                        geom_point(position = position_dodge(width = 0.1), size = 2.0)
 
                 val p = plot + geom + ggtitle("errorbar")
                 p.show()
             }
 
+            @Suppress("SpellCheckingInspection")
             fun pointrange() {
                 val geom = geom_pointrange(
-                    position = Pos.position_dodge(width = 0.1),
+                    position = position_dodge(width = 0.1),
                     color = "black",
                     size = 1.0
                 ) {
                     ymin = "min"; ymax = "max"; group = "supp"
-                } + geom_line(position = Pos.position_dodge(width = 0.1))
+                } + geom_line(position = position_dodge(width = 0.1))
 
                 val p = plot + geom + ggtitle("pointrange")
                 p.show()
             }
 
+            @Suppress("SpellCheckingInspection")
             fun linerange() {
                 val geom = geom_linerange(
-                    position = Pos.position_dodge(width = 0.1),
+                    position = position_dodge(width = 0.1),
                     size = 5.0
                 ) {
                     ymin = "min"; ymax = "max"; group = "supp"
                 } +
-                        geom_line(position = Pos.position_dodge(width = 0.1)) +
-                        geom_point(position = Pos.position_dodge(width = 0.1), size = 2.0)
+                        geom_line(position = position_dodge(width = 0.1)) +
+                        geom_point(position = position_dodge(width = 0.1), size = 2.0)
                 val p = plot + geom + ggtitle("linerange")
                 p.show()
             }
@@ -87,7 +91,7 @@ object ErrorBar {
                     stat = Stat.identity
                 ) { fill = "supp" } +
                         geom_errorbar(
-                            position = Pos.position_dodge(width = 0.9),
+                            position = position_dodge(width = 0.9),
                             color = "black",
                             width = 0.1
                         ) {

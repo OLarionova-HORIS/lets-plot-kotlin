@@ -43,10 +43,10 @@ import jetbrains.letsPlot.intern.layer.geom.BarMapping
  *     mapped to plot "aesthetics".
  */
 class geom_bar(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.count(),
     position: PosOptions = Pos.stack,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val x: Double? = null,
     override val y: Double? = null,
@@ -64,7 +64,7 @@ class geom_bar(
         geom = Geom.bar(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )
 

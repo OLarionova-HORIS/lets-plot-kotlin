@@ -46,10 +46,10 @@ import jetbrains.letsPlot.intern.layer.geom.*
  *     mapped to plot "aesthetics".
  */
 class geom_rect(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val xmin: Double? = null,
     override val xmax: Double? = null,
@@ -69,7 +69,7 @@ class geom_rect(
         geom = Geom.rect(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )
 

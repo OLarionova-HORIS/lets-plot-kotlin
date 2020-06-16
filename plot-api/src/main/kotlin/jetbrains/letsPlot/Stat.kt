@@ -58,12 +58,40 @@ object Stat {
     @Suppress("ClassName")
     class boxplot(
         mapping: BoxplotMapping.() -> Unit = {},
-        override val varwidth: Boolean? = null,
+        override val varWidth: Boolean? = null,
+        @Suppress("SpellCheckingInspection")
         override val coef: Double? = null
-    ) : BoxplotParameters,
+    ) : BoxplotStatParameters,
         StatOptions(
             StatKind.BOXPLOT,
             mapping = BoxplotMapping().apply(mapping).seal()
+        ) {
+        override val parameters = this.seal()
+    }
+
+    @Suppress("ClassName")
+    class bin2d(
+        mapping: Bin2dMapping.() -> Unit = {},
+        override val binCount: List<Int>? = null,
+        override val binWidth: List<Double?>? = null,
+        override val drop: Boolean? = null
+    ) : Bin2dParameters,
+        StatOptions(
+            StatKind.BIN2D,
+            mapping = Bin2dMapping().apply(mapping).seal()
+        ) {
+        override val parameters = this.seal()
+    }
+
+    @Suppress("ClassName")
+    class contour(
+        mapping: ContourMapping.() -> Unit = {},
+        override val binCount: Int? = null,
+        override val binWidth: Double? = null
+    ) : ContourParameters,
+        StatOptions(
+            StatKind.CONTOUR,
+            mapping = ContourMapping().apply(mapping).seal()
         ) {
         override val parameters = this.seal()
     }

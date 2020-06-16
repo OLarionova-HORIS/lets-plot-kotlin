@@ -44,10 +44,10 @@ import jetbrains.letsPlot.intern.layer.geom.LineMapping
  *     mapped to plot "aesthetics".
  */
 class geom_line(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val x: Double? = null,
     override val y: Double? = null,
@@ -64,7 +64,7 @@ class geom_line(
         geom = line(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )
 

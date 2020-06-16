@@ -15,7 +15,7 @@ import jetbrains.letsPlot.intern.layer.StatOptions
 import jetbrains.letsPlot.intern.layer.geom.ABLineAesthetics
 import jetbrains.letsPlot.intern.layer.geom.ABLineMapping
 
-@Suppress("ClassName")
+@Suppress("ClassName", "SpellCheckingInspection")
 /**
  * Add straight lines to a plot specified by slope and intercept.
  * @param data dictionary or pandas DataFrame, optional.
@@ -46,10 +46,10 @@ import jetbrains.letsPlot.intern.layer.geom.ABLineMapping
  *     mapped to plot "aesthetics".
  */
 class geom_abline(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val slope: Double? = null,
     override val intercept: Double? = null,
@@ -66,7 +66,7 @@ class geom_abline(
         geom = abline(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )
 

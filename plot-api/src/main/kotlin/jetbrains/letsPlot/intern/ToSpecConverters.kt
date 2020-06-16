@@ -35,15 +35,15 @@ fun Plot.toSpec(): MutableMap<String, Any> {
     plot.widthScale?.let { spec["widthScale"] = it }
 
 // TODO:
-//    const val TITLE = "ggtitle"
-//    const val TITLE_TEXT = "text"
 //    const val COORD = "coord"
-//    const val FACET = "facet"
-//    const val THEME = "theme"    // done
-//    const val SIZE = "ggsize"    // done
 
     for (plotFeature in plot.otherFeatures()) {
-        spec[plotFeature.kind] = plotFeature.toSpec()
+        if (plotFeature.kind == Option.Plot.THEME && spec.containsKey(Option.Plot.THEME)) {
+            // merge themes
+            spec[Option.Plot.THEME] = spec[Option.Plot.THEME] as Map<*, *> + plotFeature.toSpec()
+        } else {
+            spec[plotFeature.kind] = plotFeature.toSpec()
+        }
     }
 
     return spec
@@ -51,9 +51,6 @@ fun Plot.toSpec(): MutableMap<String, Any> {
 
 fun Layer.toSpec(): MutableMap<String, Any> {
     val spec = HashMap<String, Any>()
-
-    // ToDo:
-//    layer.sampling
 
     data?.let {
         spec[Option.PlotBase.DATA] = asPlotData(data)
@@ -66,8 +63,7 @@ fun Layer.toSpec(): MutableMap<String, Any> {
     spec[Option.Layer.POS] = if (posOptions.parameters.isEmpty()) {
         posOptions.kind.optionName()
     } else {
-        // ToDo: 'pos' -> constant (see: Option.Meta.Kind)
-        toFeatureSpec("pos", posOptions.kind.optionName(), posOptions.parameters.map)
+        toFeatureSpec(Option.Meta.Kind.POS, posOptions.kind.optionName(), posOptions.parameters.map)
     }
 
     sampling?.let {
@@ -78,7 +74,7 @@ fun Layer.toSpec(): MutableMap<String, Any> {
 
     val allParameters = parameters + geom.parameters + stat.parameters
     spec.putAll(allParameters.map)
-    if (!show_legend) {
+    if (!showLegend) {
         spec[Option.Layer.SHOW_LEGEND] = false
     }
 
@@ -87,7 +83,7 @@ fun Layer.toSpec(): MutableMap<String, Any> {
 
 @Suppress("UNCHECKED_CAST")
 fun Map<String, Any?>.filterNonNullValues(): Map<String, Any> {
-  return filter { it.value != null } as Map<String, Any>
+    return filter { it.value != null } as Map<String, Any>
 }
 
 
@@ -100,7 +96,7 @@ fun Scale.toSpec(): MutableMap<String, Any> {
     labels?.let { spec[LABELS] = labels }
     limits?.let { spec[LIMITS] = limits }
     expand?.let { spec[EXPAND] = expand }
-    na_value?.let { spec[NA_VALUE] = na_value }
+    naValue?.let { spec[NA_VALUE] = naValue }
     guide?.let { spec[GUIDE] = guide }
 //    trans    ?.let{ spec[TRANS    ] = trans    }  // ToDo: add trans
 
@@ -112,8 +108,6 @@ fun OtherPlotFeature.toSpec(): MutableMap<String, Any> {
     return HashMap(options)
 }
 
-private fun asPlotData(dataRaw: Any) = dataRaw  // placeholder
-
 private fun toFeatureSpec(kind: String, name: String?, parameters: Map<String, Any>): MutableMap<String, Any> {
     val spec = HashMap<String, Any>()
     spec[KIND] = kind
@@ -123,3 +117,12 @@ private fun toFeatureSpec(kind: String, name: String?, parameters: Map<String, A
     spec.putAll(parameters)
     return spec
 }
+
+private fun asPlotData(rawData: Map<*, *>): Map<String, List<Any?>> {
+    val standardisedData = HashMap<String, List<Any?>>()
+    for ((rawKey, rawValue) in rawData) {
+        standardisedData[rawKey.toString()] = SeriesStandardizing.toList(rawKey.toString(), rawValue!!)
+    }
+    return standardisedData
+}
+

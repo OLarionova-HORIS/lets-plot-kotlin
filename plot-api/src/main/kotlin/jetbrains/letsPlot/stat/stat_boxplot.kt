@@ -17,31 +17,32 @@ import jetbrains.letsPlot.intern.layer.stat.*
 
 @Suppress("ClassName")
 class stat_boxplot(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     geom: GeomOptions = Geom.boxplot(),
     position: PosOptions = dodge,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
-    override val varwidth: Any? = null,
+    override val varWidth: Any? = null,
+    @Suppress("SpellCheckingInspection")
     override val coef: Any? = null,
     override val weight: Double? = null,
     mapping: BoxplotMapping.() -> Unit = {}
 
-) : BoxplotAesthetics, BoxplotParameters,
+) : BoxplotAesthetics, BoxplotStatParameters,
     LayerBase(
         mapping = BoxplotMapping().apply(mapping).seal(),
         data = data,
         geom = geom,
         stat = Stat.boxplot(),
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
 
     ) {
 
     override fun seal(): Options {
         return super<BoxplotAesthetics>.seal() +
-                super<BoxplotParameters>.seal()
+                super<BoxplotStatParameters>.seal()
     }
 }
 

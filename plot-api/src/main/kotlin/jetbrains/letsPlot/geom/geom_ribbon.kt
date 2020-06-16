@@ -46,10 +46,10 @@ import jetbrains.letsPlot.intern.layer.geom.RibbonMapping
  *     mapped to plot "aesthetics".
  */
 class geom_ribbon(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = Pos.identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val x: Double? = null,
     override val ymin: Double? = null,
@@ -67,6 +67,6 @@ class geom_ribbon(
         geom = Geom.ribbon(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )

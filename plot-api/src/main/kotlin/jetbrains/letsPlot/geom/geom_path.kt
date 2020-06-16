@@ -48,10 +48,10 @@ import jetbrains.letsPlot.intern.layer.geom.PathMapping
  *     mapped to plot "aesthetics".
  */
 class geom_path(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val x: Double? = null,
     override val y: Double? = null,
@@ -70,7 +70,7 @@ class geom_path(
         geom = path(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )
 

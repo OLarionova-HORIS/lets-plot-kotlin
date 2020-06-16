@@ -9,11 +9,11 @@ import jetbrains.letsPlot.intern.GeomKind
 import jetbrains.letsPlot.intern.Options
 import jetbrains.letsPlot.intern.layer.GeomOptions
 import jetbrains.letsPlot.intern.layer.geom.*
-import jetbrains.letsPlot.intern.layer.stat.DensityAesthetics
+import jetbrains.letsPlot.intern.layer.geom.Bin2dMapping
 import jetbrains.letsPlot.intern.layer.geom.BoxplotAesthetics
 import jetbrains.letsPlot.intern.layer.geom.BoxplotMapping
-import jetbrains.letsPlot.intern.layer.geom.BoxplotParameters
-import jetbrains.letsPlot.intern.layer.stat.BinParameters
+import jetbrains.letsPlot.intern.layer.geom.ContourMapping
+import jetbrains.letsPlot.intern.layer.stat.*
 
 /**
  * `Geom options` to pass as a value of `geom` parameter of `layer` functions like:
@@ -186,7 +186,7 @@ object Geom {
         override val parameters = this.seal()
     }
 
-    @Suppress("ClassName")
+    @Suppress("ClassName", "SpellCheckingInspection")
     class abline(
         mapping: ABLineMapping.() -> Unit = {},
         override val slope: Double? = null,
@@ -206,7 +206,7 @@ object Geom {
     @Suppress("ClassName")
     class hline(
         mapping: HLineMapping.() -> Unit = {},
-        override val yintercept: Double? = null,
+        override val yIntercept: Double? = null,
         override val alpha: Double? = null,
         override val color: Any? = null,
         override val linetype: Any? = null,
@@ -222,7 +222,7 @@ object Geom {
     @Suppress("ClassName")
     class vline(
         mapping: VLineMapping.() -> Unit = {},
-        override val xintercept: Double? = null,
+        override val xIntercept: Double? = null,
         override val alpha: Double? = null,
         override val color: Any? = null,
         override val linetype: Any? = null,
@@ -311,8 +311,10 @@ object Geom {
         override val outlierFill: Any? = null,
         override val outlierShape: Any? = null,
         override val outlierSize: Double? = null,
-        override val varwidth: Boolean? = null,
         override val fatten: Double? = null,
+        override val varWidth: Boolean? = null,
+        @Suppress("SpellCheckingInspection")
+        override val coef: Any? = null,
         override val alpha: Double? = null,
         override val color: Any? = null,
         override val fill: Any? = null,
@@ -334,7 +336,7 @@ object Geom {
         }
     }
 
-    @Suppress("ClassName")
+    @Suppress("ClassName", "SpellCheckingInspection")
     class errorbar(
         mapping: ErrorBarMapping.() -> Unit = {},
         override val x: Double? = null,
@@ -375,7 +377,7 @@ object Geom {
         override val parameters = this.seal()
     }
 
-    @Suppress("ClassName")
+    @Suppress("ClassName", "SpellCheckingInspection")
     class pointrange(
         mapping: PointRangeMapping.() -> Unit = {},
         override val x: Double? = null,
@@ -396,7 +398,7 @@ object Geom {
         override val parameters = this.seal()
     }
 
-    @Suppress("ClassName")
+    @Suppress("ClassName", "SpellCheckingInspection")
     class linerange(
         mapping: LineRangeMapping.() -> Unit = {},
         override val x: Double? = null,
@@ -508,5 +510,92 @@ object Geom {
             ImageMapping().apply(mapping).seal()
         ) {
         override val parameters = this.seal()
+    }
+
+    @Suppress("ClassName")
+    class jitter(
+        mapping: PointMapping.() -> Unit = {},
+        override val x: Double? = null,
+        override val y: Double? = null,
+        override val alpha: Double? = null,
+        override val color: Any? = null,
+        override val fill: Any? = null,
+        override val shape: Any? = null,
+        override val size: Double? = null,
+        override val stroke: Double? = null,
+        override val width: Double? = null,
+        override val height: Double? = null
+    ) : PointAesthetics,
+        JitterParameters,
+        GeomOptions(
+            GeomKind.JITTER,
+            PointMapping().apply(mapping).seal()
+        ) {
+        override val parameters = this.seal()
+        override fun seal(): Options {
+            return super<PointAesthetics>.seal() +
+                    super<JitterParameters>.seal()
+        }
+    }
+
+    @Suppress("ClassName")
+    class bin2d(
+        mapping: Bin2dMapping.() -> Unit = {},
+        override val x: Double? = null,
+        override val y: Double? = null,
+        override val width: Double? = null,
+        override val height: Double? = null,
+        override val alpha: Double? = null,
+        override val color: Any? = null,
+        override val fill: Any? = null,
+        override val linetype: Any? = null,
+        override val size: Double? = null,
+        override val weight: Any? = null,
+        override val binCount: List<Int>? = null,
+        override val binWidth: List<Double?>? = null,
+        override val drop: Boolean? = null
+    ) : TileAesthetics,
+        Bin2dAesthetics,
+        Bin2dParameters,
+        GeomOptions(
+            GeomKind.BIN_2D,
+            Bin2dMapping().apply(mapping).seal()
+        ) {
+        override val parameters = this.seal()
+
+        override fun seal(): Options {
+            return super<TileAesthetics>.seal() +
+                    super<Bin2dAesthetics>.seal() +
+                    super<Bin2dParameters>.seal()
+        }
+    }
+
+    @Suppress("ClassName")
+    class contour(
+        mapping: ContourMapping.() -> Unit = {},
+        override val x: Double? = null,
+        override val y: Double? = null,
+        override val z: Double? = null,
+        override val alpha: Double? = null,
+        override val color: Any? = null,
+        override val linetype: Any? = null,
+        override val size: Double? = null,
+        override val speed: Double? = null,
+        override val flow: Double? = null,
+        override val binCount: Int? = null,
+        override val binWidth: Double? = null
+    ) : PathAesthetics,
+        ContourAesthetics,
+        ContourParameters,
+        GeomOptions(
+            GeomKind.CONTOUR,
+            ContourMapping().apply(mapping).seal()
+        ) {
+        override val parameters = this.seal()
+        override fun seal(): Options {
+            return super<PathAesthetics>.seal() +
+                    super<ContourAesthetics>.seal() +
+                    super<ContourParameters>.seal()
+        }
     }
 }

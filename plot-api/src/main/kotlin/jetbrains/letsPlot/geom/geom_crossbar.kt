@@ -16,7 +16,7 @@ import jetbrains.letsPlot.intern.layer.StatOptions
 import jetbrains.letsPlot.intern.layer.geom.CrossBarAesthetics
 import jetbrains.letsPlot.intern.layer.geom.CrossBarMapping
 
-@Suppress("ClassName", "unused")
+@Suppress("ClassName")
 /**
  * Bar with horizontal median line
  * @param data dictionary or pandas DataFrame, optional
@@ -49,10 +49,10 @@ import jetbrains.letsPlot.intern.layer.geom.CrossBarMapping
  */
 
 class geom_crossbar(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = Pos.dodge,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     val fatten: Double? = null,
     override val x: Double? = null,
@@ -74,7 +74,7 @@ class geom_crossbar(
         geom = Geom.crossbar(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     ) {
     override fun seal(): Options {

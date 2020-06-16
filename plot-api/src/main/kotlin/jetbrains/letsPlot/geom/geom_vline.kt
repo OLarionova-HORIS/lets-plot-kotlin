@@ -29,7 +29,7 @@ import jetbrains.letsPlot.intern.layer.geom.VLineMapping
  * @param position string, optional.
  *     Position adjustment, either as a string ("identity", "stack", "dodge", ...), or the result of a call to a
  *     position adjustment function.
- * @param xintercept line x-intercept.
+ * @param xIntercept line x-intercept.
  *     The value of x at the point where the line crosses the x axis.
  * @param alpha transparency level of a layer
  *     Understands numbers between 0 and 1.
@@ -44,12 +44,12 @@ import jetbrains.letsPlot.intern.layer.geom.VLineMapping
  *     mapped to plot "aesthetics".
  */
 class geom_vline(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
-    override val xintercept: Double? = null,
+    override val xIntercept: Double? = null,
     override val alpha: Double? = null,
     override val color: Any? = null,
     override val linetype: Any? = null,
@@ -63,7 +63,7 @@ class geom_vline(
         geom = vline(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )
 

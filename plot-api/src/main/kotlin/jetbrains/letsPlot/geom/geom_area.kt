@@ -45,10 +45,10 @@ import jetbrains.letsPlot.intern.layer.geom.AreaMapping
  *     mapped to plot "aesthetics".
  */
 class geom_area(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = identity,
     position: PosOptions = Pos.stack,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val x: Double? = null,
     override val y: Double? = null,
@@ -66,7 +66,7 @@ class geom_area(
         geom = area(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )
 

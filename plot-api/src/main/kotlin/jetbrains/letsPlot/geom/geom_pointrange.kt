@@ -9,11 +9,14 @@ import jetbrains.letsPlot.Geom
 import jetbrains.letsPlot.Pos
 import jetbrains.letsPlot.Stat
 import jetbrains.letsPlot.intern.Options
-import jetbrains.letsPlot.intern.layer.*
+import jetbrains.letsPlot.intern.layer.LayerBase
+import jetbrains.letsPlot.intern.layer.PosOptions
+import jetbrains.letsPlot.intern.layer.SamplingOptions
+import jetbrains.letsPlot.intern.layer.StatOptions
 import jetbrains.letsPlot.intern.layer.geom.PointRangeAesthetics
 import jetbrains.letsPlot.intern.layer.geom.PointRangeMapping
 
-@Suppress("ClassName")
+@Suppress("ClassName", "SpellCheckingInspection")
 /**
  * Vertical line defined by upper and lower value with mid-point at Y-location.
  * @param data dictionary or pandas DataFrame, optional.
@@ -44,12 +47,11 @@ import jetbrains.letsPlot.intern.layer.geom.PointRangeMapping
  *     Aesthetic mappings describe the way that variables in the data are
  *     mapped to plot "aesthetics".
  */
-
 class geom_pointrange(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = Pos.identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     val fatten: Double? = null,
     override val x: Double? = null,
@@ -70,7 +72,7 @@ class geom_pointrange(
         geom = Geom.pointrange(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     ) {
     override fun seal(): Options {

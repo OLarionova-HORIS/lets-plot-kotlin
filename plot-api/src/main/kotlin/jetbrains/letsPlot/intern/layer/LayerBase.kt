@@ -10,11 +10,11 @@ import jetbrains.letsPlot.intern.Options
 
 abstract class LayerBase(
     mapping: Options,
-    data: Any? = null,
+    data: Map<*, *>? = null,
     geom: GeomOptions,
     stat: StatOptions,
     position: PosOptions,
-    show_legend: Boolean,
+    showLegend: Boolean,
     sampling: SamplingOptions? = null
 ) : Layer(
     mapping = mapping,
@@ -22,7 +22,7 @@ abstract class LayerBase(
     geom = geom,
     stat = stat,
     position = position,
-    show_legend = show_legend,
+    showLegend = showLegend,
     sampling = sampling
 ), OptionsCapsule {
 

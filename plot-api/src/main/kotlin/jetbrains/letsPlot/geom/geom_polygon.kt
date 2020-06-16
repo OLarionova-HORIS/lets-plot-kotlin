@@ -58,10 +58,10 @@ import jetbrains.letsPlot.intern.layer.geom.PolygonMapping
  *     mapped to plot "aesthetics".
  */
 class geom_polygon(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = Pos.identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val x: Double? = null,
     override val y: Double? = null,
@@ -79,6 +79,6 @@ class geom_polygon(
         geom = Geom.polygon(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )

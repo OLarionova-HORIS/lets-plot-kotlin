@@ -6,7 +6,7 @@
 package frontendContextDemo.scripts
 
 import jetbrains.letsPlot.geom.geom_point
-import jetbrains.letsPlot.ggtitle
+import jetbrains.letsPlot.label.ggtitle
 import jetbrains.letsPlot.lets_plot
 import jetbrains.letsPlot.scale.scale_size_area
 import frontendContextDemo.ScriptInJfxContext
@@ -25,7 +25,7 @@ object Title {
             val p = lets_plot(dat) +
                     geom_point { x = "x"; y = "y" } +
                     ggtitle("Sine function") +
-                    scale_size_area(max_size = 70, guide = "none")
+                    scale_size_area(maxSize = 70, guide = "none")
 
             p.show()
         }

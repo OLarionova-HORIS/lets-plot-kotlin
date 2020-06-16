@@ -15,7 +15,7 @@ import jetbrains.letsPlot.intern.layer.StatOptions
 import jetbrains.letsPlot.intern.layer.geom.ErrorBarAesthetics
 import jetbrains.letsPlot.intern.layer.geom.ErrorBarMapping
 
-@Suppress("ClassName")
+@Suppress("ClassName", "SpellCheckingInspection")
 /**
  * Error bars.
  * @param data dictionary or pandas DataFrame, optional.
@@ -45,12 +45,11 @@ import jetbrains.letsPlot.intern.layer.geom.ErrorBarMapping
  *     Aesthetic mappings describe the way that variables in the data are
  *     mapped to plot "aesthetics".
  */
-
 class geom_errorbar(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.identity,
     position: PosOptions = Pos.identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val x: Double? = null,
     override val ymin: Double? = null,
@@ -68,6 +67,6 @@ class geom_errorbar(
         geom = Geom.errorbar(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )

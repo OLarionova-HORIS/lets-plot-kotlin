@@ -15,7 +15,7 @@ import jetbrains.letsPlot.intern.layer.StatOptions
 import jetbrains.letsPlot.intern.layer.stat.DensityAesthetics
 import jetbrains.letsPlot.intern.layer.stat.DensityMapping
 
-@Suppress("ClassName", "unused")
+@Suppress("ClassName")
 /**
  * Display density function.
  * @param data dictionary or pandas DataFrame, optional.
@@ -46,10 +46,10 @@ import jetbrains.letsPlot.intern.layer.stat.DensityMapping
  *     mapped to plot "aesthetics".
  */
 class geom_density(
-    data: Any? = null,
+    data: Map<*, *>? = null,
     stat: StatOptions = Stat.density(),
     position: PosOptions = Pos.identity,
-    show_legend: Boolean = true,
+    showLegend: Boolean = true,
     sampling: SamplingOptions? = null,
     override val x: Double? = null,
     override val y: Double? = null,
@@ -68,7 +68,7 @@ class geom_density(
         geom = Geom.density(),
         stat = stat,
         position = position,
-        show_legend = show_legend,
+        showLegend = showLegend,
         sampling = sampling
     )
 
